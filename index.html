@@ -183,7 +183,7 @@ body:has(.tray.on){padding-bottom:130px}
 <label>Price <select id="pf"><option value="">Any price</option><option value="0-2999">Under 3,000 THB</option><option value="3000-4999">3,000–4,999 THB</option><option value="5000-99999">5,000 THB and up</option></select></label></div></div>
 <main><p class="count" id="count"></p><p class="hint">Want to compare? Tap <b>+ Add to compare</b> on 2–4 hotels, then press <b>Compare now</b> in the bar at the bottom.</p><div class="grid" id="grid"></div>
 <p class="fine">Prices are my estimates for a standard room per night, not live rates for your dates. Check Agoda or Booking before booking. Star class, fitness and other amenities come from general hotel information and Google Maps reviews, so confirm with the hotel. Walk times are rough estimates. All hotels listed have a fitness centre.</p>
-<p class="fine">Airport times are rough taxi estimates in normal traffic, by area. They can be 60–90 minutes or more at rush hour. The Airport Rail Link from Suvarnabhumi to Makkasan (about 25–30 min), then MRT to Asok, is a traffic-free alternative.</p>
+<p class="fine">Airport times are rough car estimates in normal traffic, by area. They can be 60–90 minutes or more at rush hour. The Airport Rail Link from Suvarnabhumi to Makkasan (about 25–30 min), then MRT to Asok, is a traffic-free alternative.</p>
 <p class="fine">Hotels marked “guest score” are newer additions. Their rating is a rough 5-point conversion of review-site scores, not a Google rating, and their prices are estimates.</p></main></div>
 <main id="va" hidden><div id="ar"></div></main>
 <main id="vt" hidden><p class="count">Sights, shops and rooftops, grouped by area. For places across the city, the three boxes show how many train stops to ride from each station (BTS or MRT, counting the change to the MRT at Asok). Walking and waiting time are not included, so check Google Maps for a live route. Please check opening hours before you go.</p><div id="ag"></div></main>
@@ -202,7 +202,7 @@ a.sort((x,y)=>k==="p"?x.p-y.p:k==="pd"?y.p-x.p:k==="w"?x.w-y.w:y.r-x.r);return a
 function render(){seg();const a=list();$("count").textContent=a.length+" hotels";
 $("grid").innerHTML=a.map(h=>`<article class="card${sel.includes(h.id)?" sel":""}"><div class="cb"><div class="top"><h3>${h.n}</h3><span class="stars" title="${h.s} star">${st(h.s)}</span></div>
 <div class="price">${h.p.toLocaleString()} <small>THB / night, approx.</small></div>
-<div class="meta"><span>${h.w} min walk to ${h.b} BTS</span><span>★ ${h.r.toFixed(1)} ${h.rn?"guest score":"Google"}</span><span>✈ ${h.a} min by taxi from Suvarnabhumi airport</span><span>✈ ${h.d} min by taxi from Don Mueang airport</span></div>
+<div class="meta"><span>${h.w} min walk to ${h.b} BTS</span><span>★ ${h.r.toFixed(1)} ${h.rn?"guest score":"Google"}</span><span>✈ ${h.a} min by car from Suvarnabhumi airport</span><span>✈ ${h.d} min by car from Don Mueang airport</span></div>
 <div class="tags">${tag("Fitness",1)}${h.po?tag("Pool",1):""}${h.lo?tag("Club lounge",1):""}${h.sp?tag("Spa",1):""}</div><p class="note">${h.t}</p>
 <details class="nbd"><summary>Things to see nearby</summary><ul>${h.nb.map(x=>"<li>"+x+"</li>").join("")}</ul></details>
 <a class="pl" href="https://www.google.com/search?tbm=isch&q=${encodeURIComponent(h.n+" Bangkok")}" target="_blank" rel="noopener">See photos</a><div class="act"><a class="map" href="${h.m}" target="_blank" rel="noopener">Open map</a><button class="cmp" data-c="${h.id}">${sel.includes(h.id)?"✓ Added":"+ Add to compare"}</button></div></div></article>`).join("");
@@ -216,8 +216,8 @@ ${row("Stars",h=>st(h.s),h=>h.s===mx("s"))}
 ${row("Google rating",h=>h.r.toFixed(1),h=>h.r===mx("r"))}
 ${row("Nearest BTS",h=>h.b)}
 ${row("Walk to BTS",h=>"≈ "+h.w+" min",h=>h.w===mn("w"))}
-${row("Taxi from Suvarnabhumi airport",h=>"≈ "+h.a+" min")}
-${row("Taxi from Don Mueang airport",h=>"≈ "+h.d+" min")}
+${row("Car from Suvarnabhumi airport",h=>"≈ "+h.a+" min")}
+${row("Car from Don Mueang airport",h=>"≈ "+h.d+" min")}
 ${row("Fitness",h=>"Yes")}
 ${row("Pool",h=>yn(h.po))}${row("Club lounge",h=>yn(h.lo))}${row("Spa",h=>yn(h.sp))}
 ${row("Notes",h=>h.t)}
@@ -373,7 +373,7 @@ const TH={
 "Usually a bit pricier; nightlife is milder than Nana but still there":"ราคามักสูงกว่าเล็กน้อย กลางคืนเงียบกว่านานา แต่ก็ยังมี","Soi 26 has an older local feel, and some hotels there are a 10-minute walk from the BTS":"ซอย 26 มีบรรยากาศท้องถิ่นแบบเก่า และบางโรงแรมอยู่ห่างจาก BTS เดินราว 10 นาที",
 "Summarised from several travel and expat guides plus my own general knowledge. Opinions vary by taste, so treat this as a rough guide. Sukhumvit has few classic sights of its own; the Grand Palace, temples and the river are a taxi or BTS ride away.":"สรุปจากคู่มือท่องเที่ยวและคู่มือชาวต่างชาติหลายแห่ง รวมกับความรู้ทั่วไปของฉัน ความชอบแต่ละคนต่างกัน จึงใช้เป็นแนวทางคร่าวๆ เท่านั้น สุขุมวิทมีสถานที่เที่ยวแบบคลาสสิกไม่มาก พระบรมมหาราชวัง วัด และแม่น้ำ อยู่ห่างไปแค่นั่งแท็กซี่หรือ BTS",
 "Price / night":"ราคา / คืน","Stars":"ดาว","Google rating":"คะแนน Google","Nearest BTS":"BTS ที่ใกล้ที่สุด","Walk to BTS":"เดินไป BTS","Notes":"หมายเหตุ","Nearby":"ใกล้เคียง","Map":"แผนที่","Yes":"มี",
-"Airport times are rough taxi estimates in normal traffic, by area. They can be 60–90 minutes or more at rush hour. The Airport Rail Link from Suvarnabhumi to Makkasan (about 25–30 min), then MRT to Asok, is a traffic-free alternative.":"เวลาจากสนามบินเป็นค่าประมาณของแท็กซี่ตอนรถไม่ติดมาก แยกตามย่าน ช่วงเร่งด่วนอาจใช้ 60–90 นาทีหรือมากกว่า ทางเลือกที่ไม่ต้องเจอรถติดคือแอร์พอร์ตเรลลิงก์จากสุวรรณภูมิไปมักกะสัน (ประมาณ 25–30 นาที) แล้วต่อ MRT ไปอโศก","Taxi from Suvarnabhumi airport":"แท็กซี่จากสนามบินสุวรรณภูมิ","Taxi from Don Mueang airport":"แท็กซี่จากสนามบินดอนเมือง",
+"Airport times are rough car estimates in normal traffic, by area. They can be 60–90 minutes or more at rush hour. The Airport Rail Link from Suvarnabhumi to Makkasan (about 25–30 min), then MRT to Asok, is a traffic-free alternative.":"เวลาจากสนามบินเป็นค่าประมาณของการเดินทางโดยรถยนต์ตอนรถไม่ติดมาก แยกตามย่าน ช่วงเร่งด่วนอาจใช้ 60–90 นาทีหรือมากกว่า ทางเลือกที่ไม่ต้องเจอรถติดคือแอร์พอร์ตเรลลิงก์จากสุวรรณภูมิไปมักกะสัน (ประมาณ 25–30 นาที) แล้วต่อ MRT ไปอโศก","Car from Suvarnabhumi airport":"นั่งรถจากสนามบินสุวรรณภูมิ","Car from Don Mueang airport":"นั่งรถจากสนามบินดอนเมือง",
 "Highlighted cells show the best value in each row.":"ช่องที่เน้นสีคือค่าที่ดีที่สุดในแต่ละแถว",
 "All places":"ทุกที่","Shopping":"ช้อปปิ้ง","Food":"อาหาร","Activities":"กิจกรรม","Temples & culture":"วัดและวัฒนธรรม","Parks & views":"สวนและจุดชมวิว","Rooftop bars":"รูฟท็อปบาร์",
 "Around Asok BTS / Sukhumvit MRT":"รอบ BTS อโศก / MRT สุขุมวิท","Around Nana BTS":"รอบ BTS นานา","Around Phrom Phong BTS":"รอบ BTS พร้อมพงษ์","Famous places across Bangkok, and how many stops away":"สถานที่ดังทั่วกรุงเทพฯ และอยู่ห่างกี่ป้าย",
@@ -388,7 +388,7 @@ const R=[
 [/^(\d+) hotels$/,(m,a)=>a+" โรงแรม"],
 [/^(\d+) of 4 chosen( – add at least 2| – ready to compare)?$/,(m,a,b)=>"เลือกแล้ว "+a+" จาก 4"+(b?(b.indexOf("least")>0?" – เพิ่มอย่างน้อย 2":" – พร้อมเปรียบเทียบ"):"")],
 [/^(\d+) min walk to (.+) BTS$/,(m,a,b)=>"เดิน "+a+" นาทีถึง BTS"+q(b)],
-[/^(\d+–\d+) min by taxi from (Suvarnabhumi|Don Mueang) airport$/,(m,a,b)=>"แท็กซี่จาก"+(b==="Don Mueang"?"ดอนเมือง":"สุวรรณภูมิ")+" "+a+" นาที"],[/^≈ (\d+–\d+) min$/,(m,a)=>"≈ "+a+" นาที"],
+[/^(\d+–\d+) min by car from (Suvarnabhumi|Don Mueang) airport$/,(m,a,b)=>"นั่งรถจาก"+(b==="Don Mueang"?"ดอนเมือง":"สุวรรณภูมิ")+" "+a+" นาที"],[/^≈ (\d+–\d+) min$/,(m,a)=>"≈ "+a+" นาที"],
 [/^≈ (\d+) min$/,(m,a)=>"≈ "+a+" นาที"],[/^≈ ([\d,]+) THB$/,(m,a)=>"≈ "+a+" บาท"],
 [/^★ ([\d.]+) Google$/,(m,a)=>"★ "+a+" จาก Google"],
 [/^★ ([\d.]+) guest score$/,(m,a)=>"★ "+a+" คะแนนผู้เข้าพัก"],
