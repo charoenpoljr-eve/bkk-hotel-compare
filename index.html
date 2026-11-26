@@ -157,6 +157,15 @@ h3{font-size:17px;line-height:1.2;overflow-wrap:anywhere}
 }
 .lg{position:absolute;top:calc(12px + env(safe-area-inset-top,0px));right:14px;z-index:3;background:rgba(255,255,255,.14);color:#fff;border:1.5px solid rgba(255,255,255,.7);border-radius:999px;padding:8px 16px;font-size:16px;font-weight:700;cursor:pointer}
 .lg:hover{background:rgba(255,255,255,.28)}
+/* Phone: roomier filter bar */
+@media (max-width:700px){
+.ctl{padding:0 10px}
+.bar{padding:12px;gap:12px}
+.seg{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;flex:1 1 100%}
+.chip{font-size:16px;padding:10px 8px;text-align:center;line-height:1.25}
+.bar>label{flex:1 1 calc(50% - 6px);min-width:0;display:flex;flex-direction:column;gap:4px;font-size:14px;font-weight:600}
+.bar>label select{width:100%;font-size:14px;padding:10px 4px;box-sizing:border-box;text-overflow:ellipsis}
+}
 </style></head><body>
 <header><button id="lg" class="lg" type="button" aria-label="Language">ไทย</button><div class="hart" id="hart"></div><div class="w"><p class="from">For Uncle Joe</p><h1>Hotel shortlist from Yu</h1><p>Hotels near Asok, Phrom Phong and Nana BTS. 4★ and up, all with a fitness centre. Tap a station to filter, and tap “Compare” on up to 4 hotels to see them side by side.</p></div></header>
 <nav class="tabs" role="tablist"><button class="tab" role="tab" id="th" aria-selected="true">Hotels</button><button class="tab" role="tab" id="tt" aria-selected="false">Things to see</button><button class="tab" role="tab" id="ta" aria-selected="false">The areas</button></nav>
