@@ -166,18 +166,27 @@ h3{font-size:17px;line-height:1.2;overflow-wrap:anywhere}
 .bar>label{flex:1 1 calc(50% - 6px);min-width:0;display:flex;flex-direction:column;gap:4px;font-size:14px;font-weight:600}
 .bar>label select{width:100%;font-size:14px;padding:10px 4px;box-sizing:border-box;text-overflow:ellipsis}
 }
+.hint{margin:0 0 12px;font-size:15px;color:var(--mute);line-height:1.5}.hint b{color:var(--ink)}
+body:has(.tray.on){padding-bottom:130px}
+@media (max-width:700px){
+.tray .w{padding-left:12px;padding-right:12px}
+.tray .w>span:first-child{width:100%;font-size:15px}
+.tray .w>span:last-child{display:flex;gap:10px;width:100%}
+.tray button{flex:1;padding:13px 10px;font-size:16px}.tray .go{flex:2}
+.hint{font-size:14px}
+}
 </style></head><body>
 <header><button id="lg" class="lg" type="button" aria-label="Language">ไทย</button><div class="hart" id="hart"></div><div class="w"><p class="from">For Uncle Joe</p><h1>Hotel shortlist from Yu</h1><p>Hotels near Asok, Phrom Phong and Nana BTS. 4★ and up, all with a fitness centre. Tap a station to filter, and tap “Compare” on up to 4 hotels to see them side by side.</p></div></header>
 <nav class="tabs" role="tablist"><button class="tab" role="tab" id="th" aria-selected="true">Hotels</button><button class="tab" role="tab" id="tt" aria-selected="false">Things to see</button><button class="tab" role="tab" id="ta" aria-selected="false">The areas</button></nav>
 <div id="vh"><div class="ctl"><div class="bar"><div class="seg" id="seg" role="group" aria-label="Station"></div>
 <label>Sort <select id="sort"><option value="p">Price: low to high</option><option value="pd">Price: high to low</option><option value="w">Closest to BTS</option><option value="r">Top rated</option></select></label>
 <label>Price <select id="pf"><option value="">Any price</option><option value="0-2999">Under 3,000 THB</option><option value="3000-4999">3,000–4,999 THB</option><option value="5000-99999">5,000 THB and up</option></select></label></div></div>
-<main><p class="count" id="count"></p><div class="grid" id="grid"></div>
+<main><p class="count" id="count"></p><p class="hint">Want to compare? Tap <b>+ Add to compare</b> on 2–4 hotels, then press <b>Compare now</b> in the bar at the bottom.</p><div class="grid" id="grid"></div>
 <p class="fine">Prices are my estimates for a standard room per night, not live rates for your dates. Check Agoda or Booking before booking. Star class, fitness and other amenities come from general hotel information and Google Maps reviews, so confirm with the hotel. Walk times are rough estimates. All hotels listed have a fitness centre.</p>
 <p class="fine">Hotels marked “guest score” are newer additions. Their rating is a rough 5-point conversion of review-site scores, not a Google rating, and their prices are estimates.</p></main></div>
 <main id="va" hidden><div id="ar"></div></main>
 <main id="vt" hidden><p class="count">Sights, shops and rooftops, grouped by area. For places across the city, the three boxes show how many train stops to ride from each station (BTS or MRT, counting the change to the MRT at Asok). Walking and waiting time are not included, so check Google Maps for a live route. Please check opening hours before you go.</p><div id="ag"></div></main>
-<div class="tray" id="tray"><div class="w"><span id="tc"></span><span><button class="clr" id="clr">Clear</button> <button class="go" id="go">Compare</button></span></div></div>
+<div class="tray" id="tray"><div class="w"><span id="tc"></span><span><button class="clr" id="clr">Clear</button> <button class="go" id="go">Compare now</button></span></div></div>
 <div class="modal" id="modal" role="dialog" aria-label="Comparison"><div class="mh"><h2>Compare hotels</h2><button id="close">Close</button></div><div class="w"><div class="tw" id="tw"></div></div></div>
 <script>
 function art(n){let r=n*9301+49297;const R=()=>(r=(r*9301+49297)%233280)/233280;let o="",x=0;while(x<300){const w=14+R()*22,h=28+R()*62;o+=`<rect x="${x}" y="${110-h}" width="${w-2}" height="${h}"/>`;x+=w}
@@ -195,8 +204,8 @@ $("grid").innerHTML=a.map(h=>`<article class="card${sel.includes(h.id)?" sel":""
 <div class="meta"><span>${h.w} min walk to ${h.b} BTS</span><span>★ ${h.r.toFixed(1)} ${h.rn?"guest score":"Google"}</span></div>
 <div class="tags">${tag("Fitness",1)}${h.po?tag("Pool",1):""}${h.lo?tag("Club lounge",1):""}${h.sp?tag("Spa",1):""}</div><p class="note">${h.t}</p>
 <details class="nbd"><summary>Things to see nearby</summary><ul>${h.nb.map(x=>"<li>"+x+"</li>").join("")}</ul></details>
-<a class="pl" href="https://www.google.com/search?tbm=isch&q=${encodeURIComponent(h.n+" Bangkok")}" target="_blank" rel="noopener">See photos</a><div class="act"><a class="map" href="${h.m}" target="_blank" rel="noopener">Open map</a><button class="cmp" data-c="${h.id}">${sel.includes(h.id)?"Selected":"Compare"}</button></div></div></article>`).join("");
-$("tray").classList.toggle("on",sel.length>0&&tab==="h");$("tc").textContent=sel.length+" selected"+(sel.length<2?" – pick at least 2":"");$("go").disabled=sel.length<2;$("go").style.opacity=sel.length<2?.5:1}
+<a class="pl" href="https://www.google.com/search?tbm=isch&q=${encodeURIComponent(h.n+" Bangkok")}" target="_blank" rel="noopener">See photos</a><div class="act"><a class="map" href="${h.m}" target="_blank" rel="noopener">Open map</a><button class="cmp" data-c="${h.id}">${sel.includes(h.id)?"✓ Added":"+ Add to compare"}</button></div></div></article>`).join("");
+$("tray").classList.toggle("on",sel.length>0&&tab==="h");$("tc").textContent=sel.length+" of 4 chosen"+(sel.length<2?" – add at least 2":" – ready to compare");$("go").disabled=sel.length<2;$("go").style.opacity=sel.length<2?.5:1}
 function table(){const a=sel.map(i=>D[i]);const mn=(k)=>Math.min(...a.map(h=>h[k])),mx=(k)=>Math.max(...a.map(h=>h[k]));
 const row=(l,fn,best)=>`<tr><th scope="row">${l}</th>${a.map(h=>`<td class="${best&&best(h)?"best":""}">${fn(h)}</td>`).join("")}</tr>`;
 const yn=v=>v?"Yes":"–";
@@ -322,6 +331,8 @@ $("hart").innerHTML=art(11);render();
 (function(){
 let L="en";try{L=localStorage.getItem("lang")||"en"}catch(e){}
 const TH={
+"+ Add to compare":"+ เพิ่มเพื่อเปรียบเทียบ","✓ Added":"✓ เพิ่มแล้ว","Compare now":"ดูเปรียบเทียบ",
+"Want to compare? Tap":"อยากเปรียบเทียบ? แตะ","+ Add to compare ":"+ เพิ่มเพื่อเปรียบเทียบ","on 2–4 hotels, then press":"ที่โรงแรม 2–4 แห่ง แล้วกด","in the bar at the bottom.":"ที่แถบด้านล่าง",
 "Price":"ราคา","Any price":"ทุกราคา","Under 3,000 THB":"ต่ำกว่า 3,000 บาท","3,000–4,999 THB":"3,000–4,999 บาท","5,000 THB and up":"5,000 บาทขึ้นไป",
 "Hotels marked “guest score” are newer additions. Their rating is a rough 5-point conversion of review-site scores, not a Google rating, and their prices are estimates.":"โรงแรมที่ระบุว่า “guest score” เป็นรายการที่เพิ่มใหม่ คะแนนเป็นการแปลงคร่าวๆ เป็นเต็ม 5 จากคะแนนในเว็บจองห้อง ไม่ใช่คะแนน Google และราคาเป็นการประมาณ",
 "Luxury hotel connected to Asok BTS and Sukhumvit MRT; 24-hour gym and sauna":"โรงแรมหรูเชื่อมกับ BTS อโศกและ MRT สุขุมวิท ฟิตเนส 24 ชั่วโมงและซาวน่า",
@@ -371,7 +382,7 @@ const TH={
 const q=x=>TH[x]||x;
 const R=[
 [/^(\d+) hotels$/,(m,a)=>a+" โรงแรม"],
-[/^(\d+) selected( – pick at least 2)?$/,(m,a,b)=>"เลือกแล้ว "+a+(b?" – เลือกอย่างน้อย 2":"")],
+[/^(\d+) of 4 chosen( – add at least 2| – ready to compare)?$/,(m,a,b)=>"เลือกแล้ว "+a+" จาก 4"+(b?(b.indexOf("least")>0?" – เพิ่มอย่างน้อย 2":" – พร้อมเปรียบเทียบ"):"")],
 [/^(\d+) min walk to (.+) BTS$/,(m,a,b)=>"เดิน "+a+" นาทีถึง BTS"+q(b)],
 [/^≈ (\d+) min$/,(m,a)=>"≈ "+a+" นาที"],[/^≈ ([\d,]+) THB$/,(m,a)=>"≈ "+a+" บาท"],
 [/^★ ([\d.]+) Google$/,(m,a)=>"★ "+a+" จาก Google"],
