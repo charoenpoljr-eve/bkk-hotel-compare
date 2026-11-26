@@ -175,6 +175,7 @@ body:has(.tray.on){padding-bottom:130px}
 .tray button{flex:1;padding:13px 10px;font-size:16px}.tray .go{flex:2}
 .hint{font-size:14px}
 }
+.pn{max-width:720px;margin:22px 0 0;padding:16px 20px;background:#fff;border:1px solid var(--line);border-left:4px solid var(--brass);border-radius:12px}.pn h4{margin:0 0 6px;font-size:19px}.pn ul{margin:0;padding-left:20px}.pn li{margin:6px 0;font-size:16px;color:var(--mute);line-height:1.55}
 </style></head><body>
 <header><button id="lg" class="lg" type="button" aria-label="Language">ไทย</button><div class="hart" id="hart"></div><div class="w"><p class="from">For Uncle Joe</p><h1>Hotel shortlist from Rose</h1><p>Hotels near Asok, Phrom Phong and Nana BTS. 4★ and up, all with a fitness centre. Tap a station to filter, and tap “Compare” on up to 4 hotels to see them side by side.</p></div></header>
 <nav class="tabs" role="tablist"><button class="tab" role="tab" id="th" aria-selected="true">Hotels</button><button class="tab" role="tab" id="tt" aria-selected="false">Things to see</button><button class="tab" role="tab" id="ta" aria-selected="false">The areas</button></nav>
@@ -182,10 +183,10 @@ body:has(.tray.on){padding-bottom:130px}
 <label>Sort <select id="sort"><option value="p">Price: low to high</option><option value="pd">Price: high to low</option><option value="w">Closest to BTS</option><option value="r">Top rated</option></select></label>
 <label>Price <select id="pf"><option value="">Any price</option><option value="0-2999">Under 3,000 THB</option><option value="3000-4999">3,000–4,999 THB</option><option value="5000-99999">5,000 THB and up</option></select></label></div></div>
 <main><p class="count" id="count"></p><p class="hint">Want to compare? Tap <b>+ Add to compare</b> on 2–4 hotels, then press <b>Compare now</b> in the bar at the bottom.</p><div class="grid" id="grid"></div>
-<p class="fine">Prices are my estimates for a standard room per night, not live rates for your dates. Check Agoda or Booking before booking. Star class, fitness and other amenities come from general hotel information and Google Maps reviews, so confirm with the hotel. Walk times are rough estimates. All hotels listed have a fitness centre.</p>
-<p class="fine">Prices are estimates for around 2 December, when Bangkok is in high season. I raised my usual estimates by about 10%. These are not live rates, so check Agoda or Booking for your exact dates.</p>
-<p class="fine">Airport times are rough car estimates in normal traffic, by area. They can be 60–90 minutes or more at rush hour. The Airport Rail Link from Suvarnabhumi to Makkasan (about 25–30 min), then MRT to Asok, is a traffic-free alternative.</p>
-<p class="fine">Hotels marked “guest score” are newer additions. Their rating is a rough 5-point conversion of review-site scores, not a Google rating, and their prices are estimates.</p></main></div>
+<p class="fine">Prices are estimates for a standard room per night around 2 December (high season, about 10% above usual), not live rates. Check Agoda or Booking for your dates. Star class and amenities come from general hotel info and Google Maps, so confirm with the hotel. Walk times are rough. All hotels have a fitness centre.</p>
+<p class="fine">Airport times are rough car estimates; 60–90 minutes or more at rush hour. The Airport Rail Link to Makkasan (25–30 min), then MRT to Asok, avoids traffic.</p>
+<p class="fine">“Guest score” hotels are newer additions. Their rating is a rough 5-point conversion of review-site scores, not Google.</p>
+<div class="pn"><h4>Price notes</h4><ul><li>Tax: if a price is shown as “++”, add 10% service charge + 7% VAT (about +17.7%). Agoda and Booking usually include it. Example: 3,000 → about 3,530.</li><li>Higher: Christmas and New Year, weekends, better rooms, breakfast, flexible cancellation. Lower: pre-paid rates, longer stays, member deals.</li></ul></div></main></div>
 <main id="va" hidden><div id="ar"></div></main>
 <main id="vt" hidden><p class="count">Sights, shops and rooftops, grouped by area. For places across the city, the three boxes show how many train stops to ride from each station (BTS or MRT, counting the change to the MRT at Asok). Walking and waiting time are not included, so check Google Maps for a live route. Please check opening hours before you go.</p><div id="ag"></div></main>
 <div class="tray" id="tray"><div class="w"><span id="tc"></span><span><button class="clr" id="clr">Clear</button> <button class="go" id="go">Compare now</button></span></div></div>
@@ -335,6 +336,20 @@ $("hart").innerHTML=art(11);render();
 (function(){
 let L="en";try{L=localStorage.getItem("lang")||"en"}catch(e){}
 const TH={
+"Prices are estimates for a standard room per night around 2 December (high season, about 10% above usual), not live rates. Check Agoda or Booking for your dates. Star class and amenities come from general hotel info and Google Maps, so confirm with the hotel. Walk times are rough. All hotels have a fitness centre.":"ราคาเป็นการประมาณสำหรับห้องมาตรฐานต่อคืนช่วงประมาณ 2 ธันวาคม (ไฮซีซั่น สูงกว่าปกติราว 10%) ไม่ใช่ราคาจริง ควรเช็กใน Agoda หรือ Booking ตามวันที่พัก ระดับดาวและสิ่งอำนวยความสะดวกมาจากข้อมูลทั่วไปและ Google Maps จึงควรยืนยันกับโรงแรม เวลาเดินเป็นค่าประมาณ โรงแรมทุกแห่งมีฟิตเนส",
+"Airport times are rough car estimates; 60–90 minutes or more at rush hour. The Airport Rail Link to Makkasan (25–30 min), then MRT to Asok, avoids traffic.":"เวลาไปสนามบินเป็นค่าประมาณโดยรถยนต์ ช่วงรถติดอาจ 60–90 นาทีหรือมากกว่า ทางเลือกไม่ติดคือ Airport Rail Link ไป Makkasan (25–30 นาที) แล้วต่อ MRT ไปอโศก",
+"“Guest score” hotels are newer additions. Their rating is a rough 5-point conversion of review-site scores, not Google.":"โรงแรมที่ระบุ “guest score” เป็นรายการใหม่ คะแนนเป็นการแปลงคร่าวๆ เป็นเต็ม 5 จากเว็บจองห้อง ไม่ใช่คะแนน Google",
+"Price notes":"หมายเหตุเรื่องราคา",
+"Tax: if a price is shown as “++”, add 10% service charge + 7% VAT (about +17.7%). Agoda and Booking usually include it. Example: 3,000 → about 3,530.":"ภาษี: ถ้าราคาเป็นแบบ “++” ให้บวกค่าบริการ 10% + VAT 7% (ประมาณ +17.7%) ส่วน Agoda และ Booking มักรวมให้แล้ว เช่น 3,000 → ประมาณ 3,530",
+"Higher: Christmas and New Year, weekends, better rooms, breakfast, flexible cancellation. Lower: pre-paid rates, longer stays, member deals.":"แพงขึ้น: ช่วงคริสต์มาสและปีใหม่ เสาร์-อาทิตย์ ห้องที่ดีกว่า อาหารเช้า ยกเลิกฟรี ถูกลง: จ่ายล่วงหน้า พักหลายคืน ราคาสมาชิก",
+
+"Price notes":"หมายเหตุเรื่องราคา",
+"Tax and service charge: many Thai hotels add 10% service charge + 7% VAT, about +17.7% in total, when a price is shown as “++”. Prices on Agoda or Booking usually already include it.":"ภาษีและค่าบริการ: โรงแรมไทยหลายแห่งบวกค่าบริการ 10% + VAT 7% รวมประมาณ +17.7% เมื่อราคาแสดงเป็นแบบ “++” ส่วนราคาบน Agoda หรือ Booking มักรวมให้แล้ว",
+"If the prices above do not include tax: 2,600 → about 3,060, 3,000 → about 3,530, 3,500 → about 4,120, 4,600 → about 5,410, 5,300 → about 6,240, 7,700 → about 9,060 THB per night.":"ถ้าราคาข้างบนยังไม่รวมภาษี: 2,600 → ประมาณ 3,060, 3,000 → ประมาณ 3,530, 3,500 → ประมาณ 4,120, 4,600 → ประมาณ 5,410, 5,300 → ประมาณ 6,240, 7,700 → ประมาณ 9,060 บาทต่อคืน",
+"Can be higher: dates around Christmas and New Year (the peak), weekends and holidays, big events in the city, club or higher-floor rooms, breakfast, extra bed, late check-out, airport transfer, and flexible-cancellation rates.":"อาจแพงขึ้น: ช่วงคริสต์มาสและปีใหม่ (แพงสุด) เสาร์-อาทิตย์และวันหยุด งานใหญ่ในเมือง ห้อง Club หรือชั้นสูง อาหารเช้า เตียงเสริม เลทเช็กเอาต์ รถรับส่งสนามบิน และราคาแบบยกเลิกฟรี",
+"Can be lower: pre-paid non-refundable rates (often 10–15% less), longer stays, weekdays, member rates, promo codes and card offers.":"อาจถูกลง: ราคาแบบจ่ายล่วงหน้ายกเลิกไม่ได้ (มักถูกลง 10–15%) พักหลายคืน วันธรรมดา ราคาสมาชิก โค้ดส่วนลด และโปรบัตรเครดิต",
+"Rule of thumb: allow about ±15–20% around the prices shown. Always check the final total for your dates before booking.":"สรุป: เผื่อประมาณ ±15–20% จากราคาที่แสดง ก่อนจองให้เช็กราคารวมสุดท้ายตามวันที่พักอีกครั้ง",
+
 "+ Add to compare":"+ เพิ่มเพื่อเปรียบเทียบ","✓ Added":"✓ เพิ่มแล้ว","Compare now":"ดูเปรียบเทียบ",
 "Want to compare? Tap":"อยากเปรียบเทียบ? แตะ","+ Add to compare ":"+ เพิ่มเพื่อเปรียบเทียบ","on 2–4 hotels, then press":"ที่โรงแรม 2–4 แห่ง แล้วกด","in the bar at the bottom.":"ที่แถบด้านล่าง",
 "Price":"ราคา","Any price":"ทุกราคา","Under 3,000 THB":"ต่ำกว่า 3,000 บาท","3,000–4,999 THB":"3,000–4,999 บาท","5,000 THB and up":"5,000 บาทขึ้นไป",
