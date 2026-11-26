@@ -1,0 +1,275 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Hotel shortlist from Yupa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Figtree:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#ffffff;--card:#fff;--ink:#0f2a43;--mute:#566b7d;--line:#d9e2e8;--brand:#0e7c86;--brand-ink:#fff;--hi:#e3f4f1;--star:#d98a00;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.55 "Plus Jakarta Sans",system-ui,sans-serif}
+header{background:#fff;color:var(--ink);padding:36px 20px 24px}
+.w{max-width:1040px;margin:0 auto}
+h1{font-size:clamp(26px,5vw,40px);line-height:1.15;margin:0 0 10px;font-weight:800;letter-spacing:-.02em}
+header p{margin:0;color:var(--mute);max-width:620px}.from{font-weight:600;color:var(--brand);margin:0 0 6px!important}
+.ctl{margin:0 auto 18px;max-width:1040px;padding:0 16px}
+.bar{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;box-shadow:0 4px 16px rgba(15,42,67,.08)}
+.seg{display:flex;flex-wrap:wrap;gap:6px;flex:1}
+button,select{font:inherit;color:inherit}
+.chip{border:1px solid var(--line);background:transparent;padding:9px 16px;border-radius:999px;cursor:pointer;font-weight:600}
+.chip[aria-pressed="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+select{padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--card)}
+main{max-width:1040px;margin:0 auto;padding:0 16px 130px}
+.count{color:var(--mute);margin:0 4px 12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.card{background:var(--card);border:2px solid var(--line);border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:10px}
+.card.sel{border-color:var(--brand);background:linear-gradient(var(--hi),var(--card) 55%)}
+.top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+h3{font-size:18px;line-height:1.3;margin:0;font-weight:800}
+.stars{color:var(--star);letter-spacing:2px;white-space:nowrap}
+.price{font-size:30px;font-weight:800;letter-spacing:-.02em}.price small{font-size:14px;font-weight:600;color:var(--mute);letter-spacing:0}
+.meta{display:flex;gap:14px;color:var(--mute);font-size:16px;flex-wrap:wrap}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-size:15px;font-weight:600;padding:4px 10px;border-radius:8px;background:var(--hi);color:var(--ink)}
+.tag.no{background:transparent;border:1px dashed var(--line);color:var(--mute);font-weight:400}
+.note{font-size:16px;color:var(--mute);margin:0}.nb{font-size:16px;margin:0;padding-top:10px;border-top:1px solid var(--line)}.nb b{display:block;margin-bottom:2px}.nb ul{margin:0;padding-left:20px}
+.act{display:flex;gap:8px;margin-top:auto;padding-top:6px}
+.act>*{flex:1;text-align:center;padding:11px;border-radius:10px;font-weight:700;cursor:pointer;text-decoration:none;font-size:18px}
+.map{background:var(--brand);color:var(--brand-ink);border:0}
+.cmp{background:transparent;border:2px solid var(--brand);color:var(--ink)}
+.sel .cmp{background:var(--brand);color:var(--brand-ink)}
+button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(--star);outline-offset:2px}
+.tray{position:fixed;left:0;right:0;bottom:0;background:var(--ink);color:#fff;padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px));display:none;z-index:20}
+.tray.on{display:block}
+.tray .w{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.tray button{border:0;border-radius:10px;padding:10px 18px;font-weight:700;cursor:pointer}
+.go{background:var(--brand);color:var(--brand-ink)}.clr{background:transparent;color:#fff;border:1px solid #fff5!important}
+.modal{position:fixed;inset:0;background:var(--bg);z-index:30;overflow:auto;display:none;padding:calc(16px + env(safe-area-inset-top,0px)) 16px calc(24px + env(safe-area-inset-bottom,0px))}
+.modal.on{display:block}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--card)}
+table{border-collapse:collapse;width:100%;min-width:560px}
+th,td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+tbody th{color:var(--mute);font-weight:600;width:130px;position:sticky;left:0;background:var(--card)}
+thead th{font-size:16px;font-weight:800}
+td.best{background:var(--hi);font-weight:800}
+tr:last-child>*{border-bottom:0}
+.mh{display:flex;justify-content:space-between;align-items:center;margin:0 auto 14px;max-width:1040px}
+.mh h2{margin:0;font-size:24px}
+.mh button{border:2px solid var(--brand);background:transparent;border-radius:10px;padding:8px 16px;font-weight:700;cursor:pointer}
+.fine{color:var(--mute);font-size:15px;margin:26px 0 0;max-width:720px}
+[hidden]{display:none!important}
+.tabs{max-width:1040px;margin:0 auto 14px;padding:0 16px;display:flex;gap:8px}
+.tab{flex:1;max-width:260px;padding:14px 6px;font-weight:800;font-size:17px;background:transparent;border:2px solid var(--line);border-radius:14px;cursor:pointer}
+.tab[aria-selected="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.ah{font-size:24px;margin:26px 0 12px;padding-bottom:6px;border-bottom:3px solid var(--brand)}
+.ah small{display:block;font-size:15px;font-weight:400;color:var(--mute)}
+.tt{display:inline-block;font-size:14px;font-weight:700;padding:3px 10px;border-radius:8px;background:var(--hi);color:var(--ink)}
+.how{font-size:16px;margin:0}.how b{font-weight:800}
+.ac{background:var(--card);border:2px solid var(--line);border-radius:18px;padding:20px;margin:0 0 16px}
+.ac h2{margin:0 0 4px;font-size:26px}.ac .vibe{color:var(--mute);margin:0 0 12px}
+.ac h4{margin:14px 0 4px;font-size:17px}.ac ul{margin:0;padding-left:20px}.ac li{margin:2px 0}
+.ac .go2{display:block;margin-top:16px;padding:12px;text-align:center;background:var(--brand);color:var(--brand-ink);border:0;border-radius:10px;font-weight:700;font-size:18px;width:100%;cursor:pointer}
+.pick{background:var(--hi);border-radius:14px;padding:16px 18px;margin:0 0 18px}.pick p{margin:3px 0}
+.st{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 0}.st span{background:var(--hi);border-radius:8px;padding:6px 10px;font-size:16px}.st b{font-size:20px}
+
+:root{--bg:#eef1ef;--ink:#14211f;--mute:#5a6765;--line:#dce2df;--deep:#0f2f2c;--jade:#256b5e;--brand:#256b5e;--hi:#e6f0ec;--star:#a8741a;--brass:#c9a468;padding-top:0;padding-bottom:0}
+body{background:var(--bg);font:17px/1.6 "Figtree",system-ui,sans-serif}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--deep);z-index:16}
+h1,h2,h3,.ah{font-family:"Cormorant Garamond",Georgia,serif}
+header{position:relative;overflow:hidden;background:linear-gradient(180deg,#0f2f2c,#17433e);color:#fff;padding:calc(48px + env(safe-area-inset-top,0px)) 20px 80px}
+header .w{position:relative;z-index:1}
+.hart{position:absolute;inset:auto 0 0 0;height:90px;opacity:.4}.hart svg,.art svg{display:block;width:100%;height:100%}
+h1{font-size:clamp(42px,9vw,72px);line-height:1;font-weight:700;color:#fff;letter-spacing:-.01em;margin:0 0 14px}
+header p{color:#c9d6d3}header p.from{color:var(--brass);font-weight:700;font-size:16px;letter-spacing:.04em}
+.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:15;background:var(--deep);max-width:none;margin:0 0 26px;padding:0 max(16px,calc((100% - 1040px)/2));gap:6px;overflow-x:auto}
+.tab{flex:0 0 auto;max-width:none;padding:15px 20px 12px;border:0;border-bottom:3px solid transparent;border-radius:0;background:transparent;color:#b9c8c4;font:700 18px "Figtree",system-ui,sans-serif}
+.tab[aria-selected="true"]{background:transparent;color:#fff;border-bottom-color:var(--brass)}
+.bar{background:#fff;border-radius:14px;box-shadow:none;padding:16px}
+.chip{background:#fff;border:1px solid var(--line);border-radius:999px;padding:10px 20px}
+.chip[aria-pressed="true"]{background:var(--deep);border-color:var(--deep);color:#fff}
+.count{font-size:16px}#vt .count{max-width:70ch}
+.grid{gap:22px;grid-template-columns:repeat(auto-fill,minmax(320px,1fr))}
+.card{padding:0;gap:0;overflow:hidden;border:1px solid var(--line);border-radius:14px;background:#fff}
+.card.sel{border-color:var(--deep);box-shadow:0 0 0 2px var(--deep);background:#fff}
+.art{position:relative;height:120px;background:linear-gradient(180deg,#1b4742,#2e6f63 62%,#c9a468)}.art.s{height:84px}
+.sb{position:absolute;top:12px;left:12px;background:rgba(255,255,255,.94);color:var(--deep);font-size:14px;font-weight:700;padding:3px 11px;border-radius:999px}
+.ph{position:absolute;bottom:10px;right:10px;background:rgba(255,255,255,.94);color:var(--deep);font-size:14px;font-weight:700;padding:4px 12px;border-radius:999px;text-decoration:none}
+.pl{font-weight:700;color:var(--jade)}
+.cb{display:flex;flex-direction:column;gap:10px;padding:18px 20px 20px;flex:1}
+h3{font-size:26px;line-height:1.1;font-weight:700}
+.price{font-size:30px;font-weight:800;font-family:"Figtree",system-ui,sans-serif}
+.tag{border-radius:999px;background:var(--hi);padding:4px 12px}
+.nbd summary{cursor:pointer;font-weight:700;color:var(--jade);padding:4px 0}.nbd ul{margin:6px 0 0;padding-left:20px;color:var(--mute);font-size:16px}
+.act>*{border-radius:10px}.map{background:var(--deep)}.cmp{border:1.5px solid var(--deep)}.sel .cmp{background:var(--deep);color:#fff}
+.tray{background:var(--deep)}.go{background:var(--brass);color:var(--deep)}
+.ah{font-size:38px;font-weight:700;border:0;padding:0;margin:44px 0 18px}.ah::after{content:"";display:block;width:56px;height:2px;background:var(--brass);margin-top:8px}
+.st{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.st span{display:flex;flex-direction:column;align-items:center;text-align:center;background:var(--bg);border-top:3px solid var(--jade);border-radius:8px;padding:8px 4px;font-size:14px;line-height:1.25;color:var(--mute)}
+.mrt .st span{border-top-color:#2d5fa8}
+.st b{font-size:28px;line-height:1.1;color:var(--ink);font-weight:800}
+.ac{border:1px solid var(--line);border-radius:14px;padding:24px}.ac h2{font-size:36px;font-weight:700}
+.pick{background:var(--deep);color:#fff;border-radius:14px}.pick b{color:var(--brass)}
+.ac .go2{background:var(--deep);border-radius:10px}
+.mh h2{font-family:"Cormorant Garamond",Georgia,serif;font-size:34px}
+
+:root{--ink:#0b1a18;--mute:#3d4b49;--line:#c8d1ce;--star:#8a5a00}
+body{font-size:19px;line-height:1.6}
+h1,h2,h3,.ah,.mh h2,.ac h2{font-family:"Figtree",system-ui,sans-serif;letter-spacing:-.01em}
+header{padding-top:calc(36px + env(safe-area-inset-top,0px));padding-bottom:64px}
+h1{font-size:clamp(34px,7vw,52px);font-weight:800;line-height:1.1}
+header p{font-size:19px;color:#e2ebe8;max-width:640px}header p.from{font-size:17px}
+.hart{height:50px;opacity:.25}
+.tabs{padding-top:10px;padding-bottom:12px;gap:8px;overflow-x:visible}
+.tab{flex:1 1 auto;white-space:nowrap;text-align:center;font-size:clamp(16px,4.4vw,19px);padding:12px 10px;border:2px solid rgba(255,255,255,.45);border-radius:12px;background:rgba(255,255,255,.1);color:#fff;cursor:pointer}
+.tab:hover{background:rgba(255,255,255,.2)}
+.tab[aria-selected="true"]{background:#fff;color:var(--deep);border-color:#fff}
+.bar{padding:14px 16px}.chip{font-size:18px;padding:12px 20px}label{font-size:18px}select{font-size:18px;padding:11px 14px}
+.count{font-size:18px;color:var(--mute)}
+.grid{grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:20px}
+.card{box-shadow:0 1px 3px rgba(15,47,44,.08)}
+.cb{padding:22px;gap:12px}
+h3{font-size:24px;line-height:1.2;font-weight:800}
+.stars{font-size:18px}
+.price{font-size:34px;font-weight:800}.price small{display:block;font-size:16px;font-weight:600;color:var(--mute);margin-top:2px}
+.meta{font-size:18px;color:var(--ink);flex-direction:column;gap:2px}
+.tag,.tt{font-size:16px;font-weight:700;color:var(--deep)}
+.note,.how{font-size:18px}.note{color:var(--mute)}
+.nbd summary,.nbd ul,.pl{font-size:18px}.nbd summary{padding:8px 0}
+.act>*{font-size:18px;padding:14px}
+.ah{font-size:30px;font-weight:800;margin:40px 0 16px}
+.st span{font-size:15px;color:var(--mute)}.st b{font-size:30px}
+.ac li,.ac .vibe{font-size:18px}.ac h4{font-size:19px}
+.fine{font-size:16px;color:var(--mute)}
+th,td{font-size:17px}
+</style></head><body>
+<header><div class="hart" id="hart"></div><div class="w"><p class="from">For Uncle Joe</p><h1>Hotel shortlist from Yupa</h1><p>Hotels near Asok, Phrom Phong and Nana BTS. 4★ and up, all with a fitness centre. Tap a station to filter, and tap “Compare” on up to 4 hotels to see them side by side.</p></div></header>
+<nav class="tabs" role="tablist"><button class="tab" role="tab" id="th" aria-selected="true">Hotels</button><button class="tab" role="tab" id="tt" aria-selected="false">Things to see</button><button class="tab" role="tab" id="ta" aria-selected="false">The areas</button></nav>
+<div id="vh"><div class="ctl"><div class="bar"><div class="seg" id="seg" role="group" aria-label="Station"></div>
+<label>Sort <select id="sort"><option value="p">Price: low to high</option><option value="pd">Price: high to low</option><option value="w">Closest to BTS</option><option value="r">Top rated</option></select></label></div></div>
+<main><p class="count" id="count"></p><div class="grid" id="grid"></div>
+<p class="fine">Prices are my estimates for a standard room per night, not live rates for your dates. Check Agoda or Booking before booking. Star class, fitness and other amenities come from general hotel information and Google Maps reviews, so confirm with the hotel. Walk times are rough estimates. All hotels listed have a fitness centre.</p></main></div>
+<main id="va" hidden><div id="ar"></div></main>
+<main id="vt" hidden><p class="count">Sights, shops and rooftops, grouped by area. For places across the city, the three boxes show how many train stops to ride from each station (BTS or MRT, counting the change to the MRT at Asok). Walking and waiting time are not included, so check Google Maps for a live route. Please check opening hours before you go.</p><div id="ag"></div></main>
+<div class="tray" id="tray"><div class="w"><span id="tc"></span><span><button class="clr" id="clr">Clear</button> <button class="go" id="go">Compare</button></span></div></div>
+<div class="modal" id="modal" role="dialog" aria-label="Comparison"><div class="mh"><h2>Compare hotels</h2><button id="close">Close</button></div><div class="w"><div class="tw" id="tw"></div></div></div>
+<script>
+function art(n){let r=n*9301+49297;const R=()=>(r=(r*9301+49297)%233280)/233280;let o="",x=0;while(x<300){const w=14+R()*22,h=28+R()*62;o+=`<rect x="${x}" y="${110-h}" width="${w-2}" height="${h}"/>`;x+=w}
+return `<svg viewBox="0 0 300 110" preserveAspectRatio="none" aria-hidden="true"><circle cx="${40+R()*220}" cy="32" r="9" fill="#e3c88f"/><g fill="#0c2321" opacity=".88">${o}</g></svg>`}
+const D=[{"nb": ["Terminal 21 mall, with floors themed on world cities", "BTS–MRT interchange: easy trips across the city", "Benjakitti Park, a lakeside park with a skywalk (short taxi ride)"], "id": 0, "n": "Sheraton Grande Sukhumvit", "s": 5, "p": 7000, "r": 4.7, "po": 1, "lo": 1, "sp": 1, "t": "Luxury landmark beside Asok BTS / Sukhumvit MRT", "b": "Asok", "w": 3, "m": "https://www.google.com/maps/search/?api=1&query=13.7374102,100.5590841&query_place_id=ChIJBSV8teOe4jARCc18BvYpuEs"}, {"nb": ["Terminal 21 mall, with floors themed on world cities", "BTS–MRT interchange: easy trips across the city", "Benjakitti Park, a lakeside park with a skywalk (short taxi ride)"], "id": 1, "n": "Grande Centre Point Terminal 21", "s": 5, "p": 3900, "r": 4.5, "po": 1, "lo": 0, "sp": 1, "t": "Connected to Terminal 21 mall and Asok BTS; covered walk", "b": "Asok", "w": 3, "m": "https://www.google.com/maps/search/?api=1&query=13.7383535,100.5607417&query_place_id=ChIJpR0RSsSY4jARHHwN3-qBOdk"}, {"nb": ["Emporium, EmQuartier and EmSphere malls", "Benjasiri Park (Soi 24)", "Japanese restaurants on Soi 33 and 39"], "id": 2, "n": "Novotel Bangkok Sukhumvit 20", "s": 4, "p": 3100, "r": 4.6, "po": 1, "lo": 1, "sp": 0, "t": "Family/club rooms; between Asok and Phrom Phong", "b": "Phrom Phong", "w": 12, "m": "https://www.google.com/maps/search/?api=1&query=13.7315121,100.5641589&query_place_id=ChIJBWCQyAKf4jARKrhUzthdjgs"}, {"nb": ["Benjakitti Park lake and skywalk", "Queen Sirikit National Convention Centre (MRT)", "Emporium and EmQuartier malls by BTS"], "id": 3, "n": "Four Points by Sheraton Sukhumvit 22", "s": 4, "p": 3200, "r": 4.6, "po": 1, "lo": 0, "sp": 0, "t": "Newer hotel with free tuk-tuk to BTS", "b": "Phrom Phong", "w": 10, "m": "https://www.google.com/maps/search/?api=1&query=13.729586,100.5650231&query_place_id=ChIJ40DcGuif4jARz8B6LCpxI4g"}, {"nb": ["Benjakitti Park lake and skywalk", "Queen Sirikit National Convention Centre (MRT)", "Emporium and EmQuartier malls by BTS"], "id": 4, "n": "Bangkok Marriott Marquis Queen’s Park", "s": 5, "p": 5200, "r": 4.6, "po": 1, "lo": 1, "sp": 1, "t": "Huge hotel, many restaurants, 24-hour gym", "b": "Phrom Phong", "w": 8, "m": "https://www.google.com/maps/search/?api=1&query=13.7303558,100.5657949&query_place_id=ChIJDf7QWt2e4jAR9f2xgL5R6KM"}, {"nb": ["Emporium, EmQuartier and EmSphere malls", "Benjasiri Park (Soi 24)", "Japanese restaurants on Soi 33 and 39"], "id": 5, "n": "Hyatt Place Bangkok Sukhumvit 24", "s": 4, "p": 3200, "r": 4.3, "po": 1, "lo": 0, "sp": 0, "t": "Close to Emporium, EmQuartier and EmSphere", "b": "Phrom Phong", "w": 6, "m": "https://www.google.com/maps/search/?api=1&query=13.7278022,100.5684601&query_place_id=ChIJ01Bg-gOf4jARgCVnwniRCoM"}, {"nb": ["Emporium, EmQuartier and EmSphere malls", "Benjasiri Park (Soi 24)", "Japanese restaurants on Soi 33 and 39"], "id": 6, "n": "Mercure Bangkok Sukhumvit 24", "s": 4, "p": 2800, "r": 4.5, "po": 1, "lo": 1, "sp": 0, "t": "Rooftop infinity pool; rooms a little dated but clean", "b": "Phrom Phong", "w": 3, "m": "https://www.google.com/maps/search/?api=1&query=13.728971,100.5695209&query_place_id=ChIJjTtMGC6f4jARw5mljfGApDk"}, {"nb": ["EmSphere and Emporium malls (walkable)", "Terminal 21 mall at Asok", "Japanese restaurants on Soi 33 and 39"], "id": 7, "n": "Novotel Living Sukhumvit Legacy", "s": 4, "p": 3900, "r": 4.6, "po": 1, "lo": 0, "sp": 0, "t": "Suite-style rooms with kitchen; good for longer stays", "b": "Asok", "w": 11, "m": "https://www.google.com/maps/search/?api=1&query=13.7352048,100.5654247&query_place_id=ChIJncYnPcSf4jAREycFmwRR_kE"}, {"nb": ["Soi 11 restaurants and rooftop bars", "Siam Paragon, CentralWorld and Erawan Shrine, a few BTS stops away"], "id": 8, "n": "The Landmark Bangkok", "s": 5, "p": 4500, "r": 4.4, "po": 1, "lo": 1, "sp": 1, "t": "Club lounge and spa; lively Nana area", "b": "Nana", "w": 3, "m": "https://www.google.com/maps/search/?api=1&query=13.7411128,100.5538893&query_place_id=ChIJ1SfBUeqf4jAR1v3mue536DE"}, {"nb": ["Soi 11 restaurants and rooftop bars", "Siam Paragon, CentralWorld and Erawan Shrine, a few BTS stops away"], "id": 9, "n": "Aloft Bangkok Sukhumvit 11", "s": 4, "p": 2900, "r": 4.4, "po": 1, "lo": 0, "sp": 0, "t": "Modern rooms; free tuk-tuk to Asok BTS", "b": "Nana", "w": 8, "m": "https://www.google.com/maps/search/?api=1&query=13.7442254,100.5565378&query_place_id=ChIJTXohrmmg4jARv1ayiIyOPJw"}, {"nb": ["Soi 11 restaurants and rooftop bars", "Siam Paragon, CentralWorld and Erawan Shrine, a few BTS stops away"], "id": 10, "n": "Novotel Bangkok Sukhumvit 4", "s": 4, "p": 2900, "r": 4.4, "po": 1, "lo": 0, "sp": 0, "t": "Soi 4 / Nana; lively at night", "b": "Nana", "w": 5, "m": "https://www.google.com/maps/search/?api=1&query=13.7393812,100.5532476&query_place_id=ChIJZwqHg4af4jARuaTuqnzbQpc"}, {"nb": ["Soi 11 restaurants and rooftop bars", "Siam Paragon, CentralWorld and Erawan Shrine, a few BTS stops away"], "id": 11, "n": "Ambassador Hotel Bangkok", "s": 4, "p": 2400, "r": 4.0, "po": 1, "lo": 0, "sp": 1, "t": "Big hotel with the lowest price on the list", "b": "Nana", "w": 4, "m": "https://www.google.com/maps/search/?api=1&query=13.7419961,100.5568748&query_place_id=ChIJpVZyYeae4jARKgrFVf9DTRY"}, {"nb": ["Soi 11 restaurants and rooftop bars", "Siam Paragon, CentralWorld and Erawan Shrine, a few BTS stops away"], "id": 12, "n": "Ramada by Wyndham Sukhumvit 11", "s": 4, "p": 2400, "r": 4.0, "po": 1, "lo": 0, "sp": 0, "t": "Rooftop pool; choose Premier rooms over basic", "b": "Nana", "w": 3, "m": "https://www.google.com/maps/search/?api=1&query=13.7404325,100.5563744&query_place_id=ChIJkbHSleae4jARwp1tiQySE4o"}, {"nb": ["Soi 11 restaurants and rooftop bars", "Siam Paragon, CentralWorld and Erawan Shrine, a few BTS stops away"], "id": 13, "n": "NIGHT Hotel Bangkok Asoke", "s": 4, "p": 2400, "r": 4.3, "po": 1, "lo": 0, "sp": 1, "t": "Quieter side street; rooms getting dated", "b": "Nana", "w": 7, "m": "https://www.google.com/maps/search/?api=1&query=13.7405907,100.5586536&query_place_id=ChIJW3-qd-ae4jAR_lOtKTIfG7A"}, {"nb": ["Emporium, EmQuartier and EmSphere malls", "Benjasiri Park (Soi 24)", "Japanese restaurants on Soi 33 and 39"], "id": 14, "n": "The Hotel Bangkok Sukhumvit 26, Affiliated by Meliá", "s": 4, "p": 3000, "r": 5.0, "po": 1, "lo": 0, "sp": 0, "t": "New Meliá-affiliated hotel on quiet Soi 26; pool and gym. Only 2 Google reviews so far", "b": "Phrom Phong", "w": 5, "m": "https://www.google.com/maps/search/?api=1&query=13.7279768,100.5701628&query_place_id=ChIJJ7zpaQCf4jARAc2pboVxeWE"}, {"nb": ["Soi 11 restaurants and rooftop bars", "Siam Paragon, CentralWorld and Erawan Shrine, a few BTS stops away"], "id": 15, "n": "Sofitel Bangkok Sukhumvit", "s": 5, "p": 4800, "r": 4.6, "po": 1, "lo": 1, "sp": 1, "t": "Sky-bridge link to Asok BTS and Terminal 21; Club Millésime lounge", "b": "Nana", "w": 6, "m": "https://www.google.com/maps/search/?api=1&query=13.7394012,100.5577259&query_place_id=ChIJW3-qd-ae4jARzIgMyGy195g"}, {"nb": ["Terminal 21 mall, with floors themed on world cities", "BTS–MRT interchange: easy trips across the city", "Benjakitti Park, a lakeside park with a skywalk (short taxi ride)"], "id": 16, "n": "Hilton Bangkok Grande Asoke", "s": 5, "p": 3500, "r": 4.4, "po": 1, "lo": 1, "sp": 1, "t": "Executive lounge; some reviews say it needs renovation", "b": "Asok", "w": 5, "m": "https://www.google.com/maps/search/?api=1&query=13.7388925,100.5620908&query_place_id=ChIJZVEM4zKf4jARM_DEhnu63Ew"}, {"nb": ["Terminal 21 mall, with floors themed on world cities", "BTS–MRT interchange: easy trips across the city", "Benjakitti Park, a lakeside park with a skywalk (short taxi ride)"], "id": 17, "n": "Canopy by Hilton Bangkok Sukhumvit", "s": 4, "p": 3700, "r": 4.8, "po": 1, "lo": 0, "sp": 0, "t": "Brand-new, stylish design hotel with pool", "b": "Asok", "w": 5, "m": "https://www.google.com/maps/search/?api=1&query=13.7374388,100.5579072&query_place_id=ChIJcRMow5Wf4jARKFmOyHcRFSo"}, {"nb": ["Emporium, EmQuartier and EmSphere malls", "Benjasiri Park (Soi 24)", "Japanese restaurants on Soi 33 and 39"], "id": 18, "n": "Emporium Suites by Chatrium", "s": 4, "p": 3800, "r": 4.5, "po": 1, "lo": 0, "sp": 0, "t": "Connected to Emporium mall and Phrom Phong BTS; big rooms with kitchen", "b": "Phrom Phong", "w": 3, "m": "https://www.google.com/maps/search/?api=1&query=13.7300495,100.5683329&query_place_id=ChIJZwjuKAKf4jAR3MNYTHSnBFw"}, {"nb": ["Emporium, EmQuartier and EmSphere malls", "Benjasiri Park (Soi 24)", "Japanese restaurants on Soi 33 and 39"], "id": 19, "n": "The Four Wings Hotel Bangkok", "s": 4, "p": 2200, "r": 4.1, "po": 1, "lo": 0, "sp": 0, "t": "Business hotel on Soi 26; rooms dated, basic gym", "b": "Phrom Phong", "w": 12, "m": "https://www.google.com/maps/search/?api=1&query=13.7247581,100.5689468&query_place_id=ChIJxS8aKgSf4jAR_8ONhvdWj1A"}, {"nb": ["Terminal 21 mall, with floors themed on world cities", "BTS–MRT interchange: easy trips across the city", "Benjakitti Park, a lakeside park with a skywalk (short taxi ride)"], "id": 20, "n": "Radisson Blu Plaza Bangkok", "s": 5, "p": 3500, "r": 4.4, "po": 1, "lo": 1, "sp": 0, "t": "Executive lounge; walk to Asok BTS and Sukhumvit MRT", "b": "Asok", "w": 8, "m": "https://www.google.com/maps/search/?api=1&query=13.7349584,100.5639821&query_place_id=ChIJ1xX8R_2e4jARe3BYdVVSo6U"}, {"nb": ["Terminal 21 mall, with floors themed on world cities", "BTS–MRT interchange: easy trips across the city", "Benjakitti Park, a lakeside park with a skywalk (short taxi ride)"], "id": 21, "n": "Rembrandt Hotel Bangkok", "s": 4, "p": 2500, "r": 4.6, "po": 1, "lo": 0, "sp": 0, "t": "Very popular (16,000+ reviews); good breakfast; Soi 18", "b": "Asok", "w": 11, "m": "https://www.google.com/maps/search/?api=1&query=13.7324897,100.5629099&query_place_id=ChIJu-gRTh2f4jARH8E0K5g_vZU"}, {"nb": ["Terminal 21 mall, with floors themed on world cities", "BTS–MRT interchange: easy trips across the city", "Benjakitti Park, a lakeside park with a skywalk (short taxi ride)"], "id": 22, "n": "Maitria Hotel Sukhumvit 18", "s": 4, "p": 2800, "r": 4.4, "po": 1, "lo": 0, "sp": 0, "t": "Apartment-style rooms with kitchenette; modern gym, rooftop pool", "b": "Asok", "w": 10, "m": "https://www.google.com/maps/search/?api=1&query=13.7328872,100.5625923&query_place_id=ChIJWTLMWrmf4jARqzu3Cq-vMZc"}];const ST=["All","Nana","Asok","Phrom Phong"];let f="All",sel=[];
+const $=i=>document.getElementById(i);
+const st=n=>"★".repeat(n);
+const tag=(l,on)=>`<span class="tag${on?"":" no"}">${l}</span>`;
+function seg(){$("seg").innerHTML=ST.map(s=>`<button class="chip" aria-pressed="${s===f}" data-s="${s}">${s==="All"?"All stations":s}</button>`).join("")}
+function list(){let a=D.filter(h=>f==="All"||h.b===f);const k=$("sort").value;
+a.sort((x,y)=>k==="p"?x.p-y.p:k==="pd"?y.p-x.p:k==="w"?x.w-y.w:y.r-x.r);return a}
+function render(){seg();const a=list();$("count").textContent=a.length+" hotels";
+$("grid").innerHTML=a.map(h=>`<article class="card${sel.includes(h.id)?" sel":""}"><div class="cb"><div class="top"><h3>${h.n}</h3><span class="stars" title="${h.s} star">${st(h.s)}</span></div>
+<div class="price">${h.p.toLocaleString()} <small>THB / night, approx.</small></div>
+<div class="meta"><span>${h.w} min walk to ${h.b} BTS</span><span>★ ${h.r.toFixed(1)} Google</span></div>
+<div class="tags">${tag("Fitness",1)}${h.po?tag("Pool",1):""}${h.lo?tag("Club lounge",1):""}${h.sp?tag("Spa",1):""}</div><p class="note">${h.t}</p>
+<details class="nbd"><summary>Things to see nearby</summary><ul>${h.nb.map(x=>"<li>"+x+"</li>").join("")}</ul></details>
+<a class="pl" href="https://www.google.com/search?tbm=isch&q=${encodeURIComponent(h.n+" Bangkok")}" target="_blank" rel="noopener">See photos</a><div class="act"><a class="map" href="${h.m}" target="_blank" rel="noopener">Open map</a><button class="cmp" data-c="${h.id}">${sel.includes(h.id)?"Selected":"Compare"}</button></div></div></article>`).join("");
+$("tray").classList.toggle("on",sel.length>0&&tab==="h");$("tc").textContent=sel.length+" selected"+(sel.length<2?" – pick at least 2":"");$("go").disabled=sel.length<2;$("go").style.opacity=sel.length<2?.5:1}
+function table(){const a=sel.map(i=>D[i]);const mn=(k)=>Math.min(...a.map(h=>h[k])),mx=(k)=>Math.max(...a.map(h=>h[k]));
+const row=(l,fn,best)=>`<tr><th scope="row">${l}</th>${a.map(h=>`<td class="${best&&best(h)?"best":""}">${fn(h)}</td>`).join("")}</tr>`;
+const yn=v=>v?"Yes":"–";
+$("tw").innerHTML=`<table><thead><tr><th></th>${a.map(h=>`<th>${h.n}</th>`).join("")}</tr></thead><tbody>
+${row("Price / night",h=>"≈ "+h.p.toLocaleString()+" THB",h=>h.p===mn("p"))}
+${row("Stars",h=>st(h.s),h=>h.s===mx("s"))}
+${row("Google rating",h=>h.r.toFixed(1),h=>h.r===mx("r"))}
+${row("Nearest BTS",h=>h.b)}
+${row("Walk to BTS",h=>"≈ "+h.w+" min",h=>h.w===mn("w"))}
+${row("Fitness",h=>"Yes")}
+${row("Pool",h=>yn(h.po))}${row("Club lounge",h=>yn(h.lo))}${row("Spa",h=>yn(h.sp))}
+${row("Notes",h=>h.t)}
+${row("Nearby",h=>h.nb.join("<br>"))}
+${row("Map",h=>`<a href="${h.m}" target="_blank" rel="noopener" style="color:var(--brand);font-weight:700">Open map</a>`)}</tbody></table>
+<p class="fine" style="padding:0 14px 8px">Highlighted cells show the best value in each row.</p>`}
+document.addEventListener("click",e=>{const s=e.target.closest("[data-s]"),c=e.target.closest("[data-c]");
+if(s){f=s.dataset.s;render()}
+if(c){const i=+c.dataset.c;if(sel.includes(i))sel=sel.filter(x=>x!==i);else if(sel.length<4)sel.push(i);else alert("You can compare up to 4 hotels.");render()}});
+$("sort").onchange=render;$("clr").onclick=()=>{sel=[];render()};
+$("go").onclick=()=>{table();$("modal").classList.add("on")};$("close").onclick=()=>$("modal").classList.remove("on");
+
+const A=[
+["Asok","Terminal 21","Shopping","A mall where each floor is themed on a world city (Rome, Paris, Tokyo, London and more). The Pier 21 food court on the top floor is cheap and easy for a quick meal.","Directly connected to Asok BTS and Sukhumvit MRT.","Terminal 21 Bangkok"],
+["Asok","Benjakitti Park","Park","Lakeside park with a long elevated skywalk through the trees. Good for a slow morning or evening walk.","About 10 min by taxi/Grab from Asok. Also close to the Soi 22 hotels.","Benjakitti Park Bangkok"],
+["Asok","Oranuch Thai Dining","Thai food","Thai restaurant on Soi 23, popular with locals. A good first dinner near Asok.","Sukhumvit Soi 23, a short walk from Asok BTS. Check opening hours.","Oranuch Thai Dining Sukhumvit 23"],
+["Asok","The Local","Thai food","Thai restaurant on Soi 23 in a traditional-style house.","Sukhumvit Soi 23, a short walk from Asok BTS.","The Local Sukhumvit 23 Bangkok"],
+["Asok","Emotion Bangkok","Western and Asian","European dishes with an Asian twist, open from morning to midnight. Relaxed, easy for a family meal.","On Sukhumvit Road near Asok BTS.","Emotion Bangkok Sukhumvit Road"],
+["Nana","Sukhumvit Soi 11","Food and drinks","Restaurants, cafés and rooftop bars on one street. Lively in the evening.","Short walk from Nana BTS. Busy and noisy at night.","Sukhumvit Soi 11 Bangkok"],
+["Phrom Phong","Emporium, EmQuartier and EmSphere","Shopping","Three connected upscale malls with a big food hall, a cinema, and the EmQuartier waterfall garden.","Directly linked to Phrom Phong BTS.","EmQuartier Bangkok"],
+["Phrom Phong","Benjasiri Park","Park","Small, calm city park beside Emporium. Good for a short walk and a rest.","Sukhumvit Soi 24, about 5 min walk from Phrom Phong BTS.","Benjasiri Park Bangkok"],
+["Phrom Phong","Rung Rueang Tung Pork Noodle","Noodles, budget","Long-running local pork noodle shop on Soi 26. Cheap, quick, and listed by the Michelin Guide as a local classic.","Sukhumvit Soi 26, near Phrom Phong. Often busy.","Rung Rueang Tung Pork Noodle Sukhumvit 26"],
+["Phrom Phong","Siam Tea Room","Thai food","Comfort-style Thai dishes inside the Marriott Marquis Queen\u2019s Park, so no need to go far.","Sukhumvit Soi 22, in the hotel.","Siam Tea Room Marriott Marquis Queen's Park Bangkok"],
+["Phrom Phong","Fujiyama Go Go","Japanese","Nagoya-style Japanese noodle bowls. One of many Japanese eateries around Soi 39.","Sukhumvit Soi 39, near Phrom Phong.","Fujiyama Go Go Sukhumvit 39"],
+["Phrom Phong","Sorn","Fine dining, special occasion","Southern Thai tasting menu with three Michelin stars. Very expensive and very hard to book, so reserve well ahead.","Sukhumvit Soi 26. Reservation essential.","Sorn Sukhumvit 26 Bangkok"],
+["Further","Erawan Shrine, CentralWorld and Central Embassy","Shrine and shopping","The busy Erawan Shrine sits among big malls. A covered BTS skywalk links Chit Lom with the Siam malls, so you can walk a long way in the shade.","Take the BTS west to Chit Lom (Central Embassy is at Phloen Chit, one stop earlier).","Erawan Shrine Bangkok",["BTS Chit Lom",2,3,4]],
+["Further","Siam Paragon, Siam Center and MBK","Shopping","Bangkok’s main shopping hub. Siam Paragon has a large food hall and an aquarium; MBK is the cheaper, crowded one, one stop further at National Stadium.","BTS west to Siam, where the two BTS lines meet.","Siam Paragon Bangkok",["BTS Siam",3,4,5]],
+["Further","Jim Thompson House Museum","Museum","Traditional Thai teak houses and a garden, once the home of the American silk entrepreneur. Calm and shaded. Visits are usually by guided tour.","BTS to National Stadium, then a short walk.","Jim Thompson House Bangkok",["BTS National Stadium",4,5,6]],
+["Further","Lumphini Park","Park","Big central park with a lake and shaded paths. Early morning is cooler and busy with people exercising. Large monitor lizards live by the water.","MRT from Sukhumvit station (at Asok) to Lumphini.","Lumphini Park Bangkok",["MRT Lumphini",4,3,4]],
+["Further","King Power Mahanakhon SkyWalk","Viewpoint","Skyscraper observation deck with a glass-floor section and wide views over the city. Book ahead, and skip it if heights are a worry.","BTS west to Siam, change to the Silom line, then go to Chong Nonsi.","Mahanakhon SkyWalk Bangkok",["BTS Chong Nonsi",6,7,8]],
+["Further","Chinatown (Yaowarat)","Food and market","Bangkok’s Chinatown, famous for street food and gold shops. Best in the evening, but crowded and hot.","MRT from Sukhumvit station to Wat Mangkon.","Yaowarat Road Bangkok",["MRT Wat Mangkon",8,7,8]],
+["Further","Wat Pho, Grand Palace and Wat Arun","Temples","Bangkok’s most famous landmarks. Dress modestly (covered shoulders and knees) and go early to avoid heat and crowds. Wat Arun is a short ferry ride across the river from Wat Pho.","MRT from Sukhumvit station to Sanam Chai, then walk about 5–10 min to Wat Pho (the Grand Palace is further on). A taxi takes about 30–45 min depending on traffic.","Wat Pho Bangkok",["MRT Sanam Chai",10,9,10]],
+["Further","ICONSIAM and Asiatique riverside","River and shopping","Large riverside mall with a floating-market style food area, and the Asiatique night market on the river. Nice in the evening.","BTS to Saphan Taksin, then the free shuttle boat from Sathorn Pier. Check boat times.","ICONSIAM Bangkok",["BTS Saphan Taksin",9,10,11]],
+["Further","Bangkok Art and Culture Centre (BACC)","Art","Contemporary art galleries over several floors, plus a café and shops. Easy to pair with Jim Thompson House and the Siam malls.","Linked by a short walkway to National Stadium BTS. Entry to exhibitions is usually free, but check what is on.","Bangkok Art and Culture Centre",["BTS National Stadium",4,5,6]],
+["Further","Wat Traimit (Golden Buddha)","Temple","A temple housing a Buddha statue made of solid gold. A quick visit, close to Chinatown. Dress modestly.","MRT from Sukhumvit station to Hua Lamphong, then walk about 10 min.","Wat Traimit Bangkok",["MRT Hua Lamphong",7,6,7]],
+["Further","Wat Saket (Golden Mount)","Temple and viewpoint","Hilltop temple reached by a few hundred steps, with wide views over the old city. Quieter than the big temples, but there are a lot of stairs.","MRT to Sam Yot, then a short taxi/Grab ride (walking is possible but hot).","Wat Saket Golden Mount Bangkok",["MRT Sam Yot",9,8,9]],
+["Further","Khao San Road","Backpacker street","Famous backpacker street with bars, street food and souvenir stalls. Very busy and loud at night; calmer by day.","No train station nearby. MRT to Sam Yot, then a taxi/Grab. A taxi straight from Sukhumvit can take 30–45 min depending on traffic.","Khao San Road Bangkok",["MRT Sam Yot",9,8,9]],
+["Further","Central Embassy","Shopping","Luxury mall with the Eathai food hall, designer shops and a big bookshop. Cooler and quieter than the Siam malls.","BTS west to Phloen Chit; the mall is linked by a covered walkway.","Central Embassy Bangkok",["BTS Phloen Chit",1,2,3]],
+["Further","CentralWorld","Shopping","One of Southeast Asia’s biggest malls, with a large food court and many Thai and international shops. Linked to the Siam malls by the covered skywalk.","BTS west to Chit Lom, then the skywalk.","CentralWorld Bangkok",["BTS Chit Lom",2,3,4]],
+["Further","MBK Center","Shopping","Older, busy mall with hundreds of small shops for souvenirs, clothes and phone gear. Prices can be bargained. Crowded, so go on a weekday if you can.","BTS to National Stadium; the mall is directly linked.","MBK Center Bangkok",["BTS National Stadium",4,5,6]],
+["Further","Octave Rooftop Lounge","Rooftop bar","Tall rooftop bar on top of Bangkok Marriott Hotel Sukhumvit with 360° city views, handy for Phrom Phong hotels. Best around sunset. Check opening hours and the dress code.","BTS to Thong Lo, then a short taxi or walk.","Octave Rooftop Lounge Bangkok",["BTS Thong Lo",3,2,1]],
+["Further","Red Sky at Centara Grand","Rooftop bar","Rooftop restaurant and bar high above CentralWorld with wide views over the city centre. Book a table for sunset and check the dress code.","BTS west to Chit Lom, then the skywalk to CentralWorld.","Red Sky Bar Centara Grand Bangkok",["BTS Chit Lom",2,3,4]],
+["Further","Vertigo and Moon Bar","Rooftop bar","Open-air rooftop on the 61st floor of Banyan Tree Bangkok, facing Lumphini Park. Great at sunset, but it can close in rain or strong wind, so check before you go.","MRT from Sukhumvit station to Lumphini, then walk about 10 min or take a taxi.","Vertigo and Moon Bar Banyan Tree Bangkok",["MRT Lumphini",4,3,4]],
+["Further","Lebua Sky Bar (State Tower)","Rooftop bar","Famous open-air rooftop bar high above the Chao Phraya River. Drinks are pricey and there is a smart-casual dress code, so check the rules and book ahead.","BTS to Saphan Taksin, then walk about 5 min to State Tower.","Lebua at State Tower Bangkok",["BTS Saphan Taksin",9,10,11]],
+["Phrom Phong","Hong Bao","Chinese food, dim sum","Popular Chinese restaurant known for dim sum served all day, with colourful swirled buns, xiao long bao and Peking duck. Often busy, so go off-peak.","Sukhumvit Soi 39, near Phrom Phong BTS. Check opening hours.","Hong Bao Sukhumvit 39 Bangkok"],
+["Phrom Phong","Pagoda","Chinese food, Cantonese","Cantonese restaurant on the 4th floor of the Bangkok Marriott Marquis Queen’s Park, known for Peking duck and dim sum (dim sum is usually at lunchtime). Easy if you stay at the hotel.","Sukhumvit Soi 22, inside the hotel. Booking is a good idea.","Pagoda Chinese Restaurant Marriott Marquis Queen's Park Bangkok"],
+["Further","Man Ho at JW Marriott","Chinese food, Cantonese","Elegant Cantonese dining room inside the JW Marriott Bangkok, a long-time favourite for dim sum and classic dishes.","BTS west to Phloen Chit, then a short taxi or walk to Sukhumvit Soi 2. Check opening hours.","Man Ho JW Marriott Bangkok",["BTS Phloen Chit",1,2,3]],
+["Further","Shang Palace at Shangri-La","Chinese food, dim sum","Well-known Cantonese restaurant at the Shangri-La Bangkok, often listed among the city’s best for dim sum. A good riverside evening.","BTS to Saphan Taksin, then a short taxi to the hotel. Booking is a good idea.","Shang Palace Shangri-La Bangkok",["BTS Saphan Taksin",9,10,11]],
+["Further","Paragon Food Hall (Siam Paragon)","Food hall","Large air-conditioned food hall inside Siam Paragon with many Thai dishes and well-known street-food names under one roof. A comfortable first taste of Thai street food.","BTS west to Siam; the mall is linked by the covered skywalk.","Paragon Food Hall Siam Paragon Bangkok",["BTS Siam",3,4,5]],
+["Further","Go-Ang Pratunam Chicken Rice","Thai street food","Famous chicken rice shop in Pratunam, recommended by the Michelin Guide. Simple, cheap and quick; expect a queue at busy times.","BTS west to Ratchathewi, then a short taxi or walk. Check opening hours.","Go-Ang Pratunam Chicken Rice Bangkok",["BTS Ratchathewi",4,5,6]],
+["Further","Victory Monument Boat Noodles","Thai street food","A lane of boat-noodle stalls serving small, cheap bowls, so people order several. Busy at lunchtime and not air-conditioned.","BTS to Victory Monument, then a short walk to the noodle lane.","Victory Monument boat noodle alley Bangkok",["BTS Victory Monument",6,7,8]],
+["Further","Thip Samai Pad Thai","Thai street food","One of Bangkok’s best-known pad thai restaurants, with queues most days. Close to Wat Saket, so easy to pair with a temple visit.","MRT to Sam Yot, then a short taxi/Grab ride (walking is possible but hot).","Thipsamai Pad Thai Bangkok",["MRT Sam Yot",9,8,9]],
+["Further","Raan Jay Fai","Michelin street food","Michelin-starred street-food shophouse famous for its crab omelette and drunken noodles. Very hard to get a table and pricey for street food, so plan well ahead.","MRT to Sam Yot, then a short taxi/Grab ride. Check booking rules and opening days.","Raan Jay Fai Bangkok",["MRT Sam Yot",9,8,9]],
+["Further","Nai Mong Hoi Thod","Michelin street food","Bib Gourmand street-food stall known for crispy oyster omelettes. In Chinatown, so combine it with a Yaowarat food walk.","MRT from Sukhumvit station to Wat Mangkon, then walk. Check opening hours.","Nai Mong Hoi Thod Bangkok",["MRT Wat Mangkon",8,7,8]],
+["Further","Charoen Saeng Silom (Jay Oh)","Michelin street food","Bib Gourmand tom yum noodle stall, spicy and sour. Reported to open in the morning and sell out by early afternoon, so go early.","BTS to Saphan Taksin, then a short walk or taxi to Charoen Krung Soi 49.","Charoen Saeng Silom Jay Oh Bangkok",["BTS Saphan Taksin",9,10,11]],
+["Phrom Phong","Gaggan","Fine dining, Indian","Progressive Indian fine dining by chef Gaggan Anand. Michelin-starred and ranked near the top of the 2026 World’s 50 Best list. Expensive, and a booking is essential.","Sukhumvit Soi 31, a short taxi from Phrom Phong or Asok BTS.","Gaggan Anand Sukhumvit 31 Bangkok"],
+["Further","Le Du","Fine dining, modern Thai","Michelin-starred modern Thai restaurant by chef Ton, built around local Thai ingredients. Book well ahead.","BTS west to Siam, change to the Silom line and ride to Sala Daeng, then walk to Silom Soi 7.","Le Du Restaurant Bangkok",["BTS Sala Daeng",5,6,7]],
+["Further","Nusara","Fine dining, Thai","Michelin-starred Thai restaurant from the chef behind Le Du, with a rooftop terrace looking over Wat Pho. Lovely at sunset; a booking is essential.","MRT from Sukhumvit station to Sanam Chai, then a short walk or taxi. Pairs well with a Wat Pho visit.","Nusara Restaurant Bangkok",["MRT Sanam Chai",10,9,10]],
+["Further","Blue Elephant Sathorn","Royal Thai food","Royal-style Thai cooking in a historic mansion, popular with visitors, and also known for its cooking school.","BTS to Surasak, then a short walk.","Blue Elephant Sathorn Bangkok",["BTS Surasak",8,9,10]],
+["Further","Tingly Thai Cooking School","Activity, cooking class","Half-day Thai cooking class: visit a local market, then cook a multi-course meal in a modern kitchen and eat it. Small groups. Some bookings include hotel pickup, so check when you book.","Silom area; the exact meeting point depends on the booking. Sala Daeng is the nearest BTS for Silom.","Tingly Thai Cooking School Bangkok",["BTS Sala Daeng",5,6,7]],
+["Further","Blue Elephant Cooking School","Activity, cooking class","Morning cooking class that starts with a visit to a local Thai market, then cooking Royal Thai dishes at Blue Elephant on Sathorn. Check current class times and prices.","BTS to Surasak, then a short walk.","Blue Elephant Cooking School Bangkok",["BTS Surasak",8,9,10]],
+["Further","Thai massage at Wat Pho","Activity, massage","Traditional Thai massage at Wat Pho, one of the oldest massage places in Bangkok. Say at the start if you prefer gentle pressure, and avoid deep stretching if you have injuries.","MRT from Sukhumvit station to Sanam Chai, then walk about 5–10 min. Expect a wait at busy times.","Wat Pho Thai massage Bangkok",["MRT Sanam Chai",10,9,10]],
+["Further","Chao Phraya Express Boat","Activity, river boat ride","Cheap, easy way to see Wat Arun, Wat Pho and the riverside from the water. Check the boat type, route and fares at the pier.","BTS to Saphan Taksin, then walk to Sathorn Pier.","Sathorn Pier Bangkok",["BTS Saphan Taksin",9,10,11]],
+];
+const AH={"Asok":"Around Asok BTS / Sukhumvit MRT","Nana":"Around Nana BTS","Phrom Phong":"Around Phrom Phong BTS","Further":"Famous places across Bangkok, and how many stops away"};
+let tf="All";const GR=["Shopping","Food","Activities","Temples & culture","Parks & views","Rooftop bars"];
+const grp=x=>{const c=x[2].toLowerCase();return /^activity/.test(c)?"Activities":/rooftop/.test(c)?"Rooftop bars":/food|noodle|dining|japanese|western|drink/.test(c)?"Food":/temple|museum|\bart\b|shrine|street/.test(c)?"Temples & culture":/shopping|market/.test(c)?"Shopping":/park|viewpoint/.test(c)?"Parks & views":"Temples & culture"};
+function things(){const cn=g=>A.filter(x=>g==="All"||grp(x)===g).length;let o=`<div class="bar" style="margin:0 0 6px"><div class="seg">`+["All",...GR].map(g=>`<button class="chip" aria-pressed="${g===tf}" data-t="${g}">${g==="All"?"All places":g} (${cn(g)})</button>`).join("")+`</div></div>`;
+for(const a of ["Asok","Nana","Phrom Phong","Further"]){const L=A.filter(x=>x[0]===a&&(tf==="All"||grp(x)===tf)).sort((p,q)=>a==="Further"?p[6][2]-q[6][2]:0);if(!L.length)continue;
+o+=`<h2 class="ah">${AH[a]}</h2><div class="grid">`+L.map(x=>`<article class="card${x[6]&&x[6][0].startsWith("MRT")?" mrt":""}"><div class="cb"><span class="tt" style="align-self:flex-start">${x[2]}</span><div class="top"><h3>${x[1]}</h3></div><p class="note">${x[3]}</p><p class="how"><b>Getting there:</b> ${x[4]}</p>${x[6]?`<p class="how"><b>Stops by train</b> (${x[6][0]}):</p><div class="st"><span>From Nana <b>${x[6][1]}</b> stops</span><span>From Asok <b>${x[6][2]}</b> stops</span><span>From Phrom Phong <b>${x[6][3]}</b> stops</span></div>`:""}<a class="pl" href="https://www.google.com/search?tbm=isch&q=${encodeURIComponent(x[1]+" Bangkok")}" target="_blank" rel="noopener">See photos</a><div class="act"><a class="map" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(x[5])}" target="_blank" rel="noopener">Open map</a>${a==="Further"?"":`<button class="cmp" data-h="${a}">Hotels near here</button>`}</div></div></article>`).join("")+"</div>"}
+$("ag").innerHTML=o}
+document.addEventListener("click",e=>{const t=e.target.closest("[data-t]");if(t){tf=t.dataset.t;things()}});
+
+const AR=[
+["Asok","Asok BTS / Sukhumvit MRT","Busy, central and well connected. The main transport hub of the three.",
+["Terminal 21 mall and hundreds of places to eat","BTS and MRT meet here; the Airport Rail Link is nearby","Supermarkets, offices, big hotels"],
+["First visit, easy travel across the city, widest choice of hotels"],
+["Busy traffic and crowds; few parks (Benjakitti is the nearest big one)","A nightlife street (Soi Cowboy) is close by, easy to avoid but good to know"]],
+["Nana","Nana BTS","Lively, with a lot going on at night, with plenty of places to eat.",
+["Bumrungrad International Hospital","Soi 11 restaurants and bars; Siam is a few BTS stops away"],
+["Hospital access, being close to the Siam shopping area"],
+["Nightlife is very visible on the main streets and around Soi 4. Hotel rooms are usually quiet, but pick a hotel on a quieter soi if the street scene is not for you"]],
+["Phrom Phong","Phrom Phong BTS","Calmer, more polished and family-friendly. The easiest fit for a relaxed stay.",
+["Emporium, EmQuartier and EmSphere malls side by side","Benjasiri Park and wider, greener pavements","Many Japanese restaurants and supermarkets (around Soi 33 and 39)"],
+["A comfortable, calm stay with shopping and food close by; older travellers and families"],
+["Usually a bit pricier; nightlife is milder than Nana but still there","Soi 26 has an older local feel, and some hotels there are a 10-minute walk from the BTS"]],
+];
+function areas(){const n=a=>D.filter(h=>h.b===a).length;
+let o='<div class="pick"><p><b>Quick pick</b></p><p>Calmest and easiest for a relaxed stay: <b>Phrom Phong</b></p><p>Most connected for getting around: <b>Asok</b></p><p>Hospital nearby, Siam close: <b>Nana</b></p></div>';
+o+=AR.map(a=>`<section class="ac"><h2>${a[0]}</h2><p class="vibe"><b>${a[1]}.</b> ${a[2]}</p><h4>What is there</h4><ul>${a[3].map(x=>"<li>"+x+"</li>").join("")}</ul><h4>Good for</h4><ul>${a[4].map(x=>"<li>"+x+"</li>").join("")}</ul><h4>Keep in mind</h4><ul>${a[5].map(x=>"<li>"+x+"</li>").join("")}</ul><button class="go2" data-h="${a[0]}">See ${n(a[0])} hotels near ${a[0]}</button></section>`).join("");
+o+='<p class="fine">Summarised from several travel and expat guides plus my own general knowledge. Opinions vary by taste, so treat this as a rough guide. Sukhumvit has few classic sights of its own; the Grand Palace, temples and the river are a taxi or BTS ride away.</p>';
+$("ar").innerHTML=o}
+let tab="h";
+function setTab(x){tab=x;$("vh").hidden=x!=="h";$("vt").hidden=x!=="t";$("va").hidden=x!=="a";$("th").setAttribute("aria-selected",x==="h");$("tt").setAttribute("aria-selected",x==="t");$("ta").setAttribute("aria-selected",x==="a");if(x==="t")things();if(x==="a")areas();render();window.scrollTo(0,0)}
+$("th").onclick=()=>setTab("h");$("tt").onclick=()=>setTab("t");$("ta").onclick=()=>setTab("a");
+document.addEventListener("click",e=>{const h=e.target.closest("[data-h]");if(h){f=h.dataset.h==="Further"?"All":h.dataset.h;setTab("h")}});
+$("hart").innerHTML=art(11);render();
+</script></body></html>
